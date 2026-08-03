@@ -1,7 +1,7 @@
-# Keil MDK build output
-/MDK-ARM/Template/
-/MDK-ARM/Objects/
-/MDK-ARM/Listings/
+# Keil MDK build output in any experiment
+**/MDK-ARM/Template/
+**/MDK-ARM/Objects/
+**/MDK-ARM/Listings/
 *.o
 *.d
 *.crf
@@ -15,14 +15,14 @@
 *.build_log.htm
 
 # Keil and debugger user-specific files
-/MDK-ARM/*.uvguix.*
-/MDK-ARM/*.uvoptx
-/MDK-ARM/JLinkLog.txt
-/MDK-ARM/JLinkSettings.ini
+**/MDK-ARM/*.uvguix.*
+**/MDK-ARM/*.uvoptx
+**/MDK-ARM/JLinkLog.txt
+**/MDK-ARM/JLinkSettings.ini
 *.bak
 
 # Local review artifacts
-/.codex_doc_review_adc_soil/
+**/.codex_doc_review_*/
 
 # Editor and operating-system noise
 *.tmp

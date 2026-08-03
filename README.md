@@ -1,25 +1,28 @@
-# STM32F103 OLED I2C Demo
+# STM32F103 Learning Labs
 
-基于 STM32F103C8T6、STM32CubeMX 和 Keil MDK 的 I2C OLED 实验工程。
+STM32F103 课程实验合集。每个实验保存在独立目录中，包含可单独打开的 STM32CubeMX 与 Keil MDK 工程。
 
-## 当前运行内容
+## 实验目录
 
-- 使用 I2C1 驱动 OLED：PB6 为 SCL，PB7 为 SDA。
-- OLED 驱动位于 `Core/Src/oled.c` 和 `Core/Inc/oled.h`。
-- 当前入口仅初始化 I2C1，并执行 OLED 显示实验。
-- 工程目录仍保留 DHT22、CO2 等早期实验模块，但它们不属于当前运行入口。
+| 编号 | 实验 | 主要内容 | 状态 |
+| --- | --- | --- | --- |
+| 01 | [I2C OLED](01-i2c-oled/) | I2C1、PB6/PB7、OLED 显示 | 已归档；本次未重新编译或进行开发板验证 |
 
-## 工程入口
+## 使用方法
 
-- CubeMX 配置：`Template.ioc`
-- Keil 工程：`MDK-ARM/Template.uvprojx`
-- 主程序：`Core/Src/main.c`
+1. 进入需要学习或复现的实验目录。
+2. 使用 STM32CubeMX 打开该目录下的 `.ioc` 文件。
+3. 使用 Keil MDK 打开 `MDK-ARM` 下的 `.uvprojx` 工程。
+4. 编译、下载并在开发板上验证实验现象。
 
-## 构建与运行
+## 添加新实验
 
-1. 使用 Keil MDK 打开 `MDK-ARM/Template.uvprojx`。
-2. 编译工程。
-3. 连接 STM32F103C8T6 开发板并下载程序。
-4. 观察 OLED 显示结果。
+新实验使用连续编号和简短英文名称，例如：
 
-> 仓库中的源码与工程配置可供检查；实际编译、下载和开发板显示结果需要在本机 Keil 与硬件环境中验证。
+```text
+02-gpio-led/
+03-timer-pwm/
+04-uart/
+```
+
+每个实验应保留独立工程，并在自己的 `README.md` 中记录目标、接线、关键代码和验证状态。
