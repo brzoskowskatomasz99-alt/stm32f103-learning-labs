@@ -10,6 +10,7 @@ STM32F103 课程实验合集。已整理的实验保存在独立目录中，包�
 | 02 | [OLED 小恐龙游戏](02-oled-dino-game/) | OLED 帧缓冲、按键跳跃、碰撞、计分、LED 爆闪 | 已归档；当前构建、下载和开发板行为已验证 |
 | 03 | [OLED 文字、图片与 GIF 取模显示](03-oled-font-bitmap-gif/) | UTF-8 中文字模、32×32 图片、GIF 连续帧 | [已归档并提供重建清单](03-oled-font-bitmap-gif/REBUILD-MANIFEST.md)；用户确认构建、下载和开发板显示通过 |
 | 04 | [OLED 界面状态机](04-oled-ui-state-machine/) | 环境监测、OLED 多页面、短按/长按、30 秒息屏唤醒、串口与联动控制 | [已归档并提供重建清单](04-oled-ui-state-machine/REBUILD-MANIFEST.md)；用户确认编译、烧录和上板验收通过 |
+| 05 | [LLCC68 P2P 双板通信验证](05-llcc68-p2p/) | SPI1、Ra-01SC、TX/RX 条件编译、分阶段接收诊断 | [已归档并提供重建清单](05-llcc68-p2p/REBUILD-MANIFEST.md)；TX 构建、终端下载与 SENT 已验证，网关无 PREAMBLE，P2P 未通过 |
 
 ## 历史学习与实操记录
 
@@ -26,6 +27,7 @@ STM32F103 课程实验合集。已整理的实验保存在独立目录中，包�
 - 2026-08-03：将当前已完成构建、下载和开发板验收的 OLED 小恐龙游戏归档为 `02-oled-dino-game`。
 - 2026-08-04：将用户确认构建、下载和真机显示全部通过的 OLED 文字、图片与 GIF 取模实验归档为 `03-oled-font-bitmap-gif`。
 - 2026-08-05：将用户确认编译、烧录和上板验收通过的环境监测 OLED 界面状态机归档为 `04-oled-ui-state-machine`。
+- 2026-08-07：将 LLCC68 P2P 双板通信实验归档为 `05-llcc68-p2p`；保留 TX/终端侧通过与网关无 PREAMBLE 的失败证据，不将 SENT 视为无线链路成功。
 
 ### 状态说明
 

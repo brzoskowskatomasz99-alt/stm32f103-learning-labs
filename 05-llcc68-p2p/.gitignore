@@ -1,0 +1,31 @@
+# Keil MDK build output
+/MDK-ARM/Template/
+/MDK-ARM/Objects/
+/MDK-ARM/Listings/
+*.o
+*.d
+*.crf
+*.axf
+*.hex
+*.bin
+*.map
+*.lnp
+*.lst
+*.dep
+*.build_log.htm
+
+# Keil and debugger user-specific files
+/MDK-ARM/*.uvguix.*
+/MDK-ARM/*.uvoptx
+/MDK-ARM/JLinkLog.txt
+/MDK-ARM/JLinkSettings.ini
+*.bak
+
+# Local review artifacts
+/.codex_doc_review_adc_soil/
+
+# Editor and operating-system noise
+*.tmp
+*.orig
+Thumbs.db
+Desktop.ini
