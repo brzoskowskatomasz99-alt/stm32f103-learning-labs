@@ -1,0 +1,14 @@
+{
+  "name": "dsh-stm32-toolkit",
+  "version": "0.1.0",
+  "description": "DSH plugin bundle: J-Link flash verify, serial probe parser, firmware size budget, git publish helper for STM32 projects",
+  "private": true,
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "dependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  }
+}

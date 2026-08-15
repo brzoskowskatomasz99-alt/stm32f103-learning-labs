@@ -1,0 +1,14 @@
+# DSH 插件封装骨架（未安装验证）
+#
+# 安装: dsh plugin --profile web add github:<你的仓库>#tools/dsh-stm32-toolkit
+# 注意: 插件条目格式请对照官方文档校准后再安装:
+#   https://github.com/deepseek-ai/deepseek-harness/blob/HEAD/docs/user/develop/basic/publish.md
+# 本文件按调研结论(2026-08-15)编写: bundle 声明 dsh.bundle.patch -> cordis.patch.yml,
+# 层栈: bundle 层 -> profile patch -> home patch -> --patch 覆盖。
+#
+# 预期条目形式(待校准):
+plugins:
+  - id: dsh-stm32-toolkit
+    name: ./src/index.ts
+    config:
+      scriptsRoot: ""   # 留空 = 使用插件内置的 <repo>/tools 路径探测
