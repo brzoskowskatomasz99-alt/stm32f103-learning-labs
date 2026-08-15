@@ -22,6 +22,8 @@
 
 /* USER CODE BEGIN 0 */
 
+#include "llcc68_p2p_config.h"
+
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -69,7 +71,13 @@ void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
+#if ( LLCC68_P2P_ROLE == LLCC68_P2P_ROLE_TX )
+  /* Terminal: CO2 sensor keeps the original 9600-baud interface. */
   huart2.Init.BaudRate = 9600;
+#else
+  /* Gateway: ESP8266 AT/transparent link uses 115200 baud. */
+  huart2.Init.BaudRate = 115200;
+#endif
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;

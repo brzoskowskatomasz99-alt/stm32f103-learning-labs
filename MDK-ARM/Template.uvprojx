@@ -365,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;./UserCode</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Drivers/LLCC68/Inc;./UserCode</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -423,6 +423,16 @@
               <FileType>1</FileType>
               <FilePath>.\UserCode\app_main.c</FilePath>
             </File>
+            <File>
+              <FileName>light.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UserCode\light.c</FilePath>
+            </File>
+            <File>
+              <FileName>soil.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UserCode\soil.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -431,6 +441,159 @@
         <Group>
           <GroupName>Application/User/Core</GroupName>
           <Files>
+            <File>
+              <FileName>llcc68_diag.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/llcc68_diag.c</FilePath>
+            </File>
+            <File>
+              <FileName>llcc68_p2p.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/llcc68_p2p.c</FilePath>
+            </File>
+            <File>
+              <FileName>protocol_lora.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/protocol_lora.c</FilePath>
+            </File>
+            <File>
+              <FileName>bridge_mqtt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/bridge_mqtt.c</FilePath>
+            </File>
+            <File>
+              <FileName>co2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/co2.c</FilePath>
+            </File>
+            <File>
+              <FileName>terminal_sensors.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/terminal_sensors.c</FilePath>
+            </File>
+            <File>
+              <FileName>service_hal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/service_hal.c</FilePath>
+            </File>
+            <File>
+              <FileName>service_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/service_control.c</FilePath>
+            </File>
+            <File>
+              <FileName>service_alarm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/service_alarm.c</FilePath>
+            </File>
+            <File>
+              <FileName>terminal_autonomy.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/terminal_autonomy.c</FilePath>
+            </File>
+            <File>
+              <FileName>command_link.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/command_link.c</FilePath>
+            </File>
+            <File>
+              <FileName>terminal_table.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/terminal_table.c</FilePath>
+            </File>
+            <File>
+              <FileName>link_stats.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/link_stats.c</FilePath>
+            </File>
+            <File>
+              <FileName>alarm_registry.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/alarm_registry.c</FilePath>
+            </File>
+            <File>
+              <FileName>gateway_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/gateway_data.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_oled.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/ui_oled.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_hal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/ui_hal.c</FilePath>
+            </File>
+            <File>
+              <FileName>esp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/esp.c</FilePath>
+            </File>
+            <File>
+              <FileName>mqtt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/mqtt.c</FilePath>
+            </File>
+            <File>
+              <FileName>dht22.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/dht22.c</FilePath>
+            </File>
+            <File>
+              <FileName>oled.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/oled.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>1</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <useXO>2</useXO>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+            <File>
+              <FileName>FontDotMatrix16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Inc/FontDotMatrix16.c</FilePath>
+            </File>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
@@ -586,52 +749,9 @@
               </FileOption>
             </File>
             <File>
-              <FileName>oled.c</FileName>
+              <FileName>spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Core/Src/oled.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>1</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                </CommonProperty>
-                <FileArmAds>
-                  <Cads>
-                    <interw>2</interw>
-                    <Optim>0</Optim>
-                    <oTime>2</oTime>
-                    <SplitLS>2</SplitLS>
-                    <OneElfS>2</OneElfS>
-                    <Strict>2</Strict>
-                    <EnumInt>2</EnumInt>
-                    <PlainCh>2</PlainCh>
-                    <Ropi>2</Ropi>
-                    <Rwpi>2</Rwpi>
-                    <wLevel>0</wLevel>
-                    <uThumb>2</uThumb>
-                    <uSurpInc>2</uSurpInc>
-                    <uC99>2</uC99>
-                    <useXO>2</useXO>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
+              <FilePath>../Core/Src/spi.c</FilePath>
             </File>
             <File>
               <FileName>tim.c</FileName>
@@ -944,6 +1064,11 @@
               </FileOption>
             </File>
             <File>
+              <FileName>stm32f1xx_hal_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f1xx_hal_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c</FilePath>
@@ -1086,6 +1211,26 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/LLCC68</GroupName>
+          <Files>
+            <File>
+              <FileName>llcc68.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/LLCC68/Src/llcc68.c</FilePath>
+            </File>
+            <File>
+              <FileName>llcc68_driver_version.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/LLCC68/Src/llcc68_driver_version.c</FilePath>
+            </File>
+            <File>
+              <FileName>llcc68_hal_stm32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/llcc68_hal_stm32.c</FilePath>
             </File>
           </Files>
         </Group>

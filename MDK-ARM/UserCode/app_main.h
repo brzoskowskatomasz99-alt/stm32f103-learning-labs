@@ -3,7 +3,6 @@
 
 #include "main.h"
 
-extern volatile uint16_t adc1_values[2];
 
 // 函数声明
 void delay_ms(uint32_t ms);

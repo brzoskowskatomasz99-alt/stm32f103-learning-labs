@@ -60,17 +60,32 @@ void Error_Handler(void);
 #define LIGHT_ADC1_IN0_GPIO_Port GPIOA
 #define SOIL_ADC1_IN1_Pin GPIO_PIN_1
 #define SOIL_ADC1_IN1_GPIO_Port GPIOA
-#define LED3_Pin GPIO_PIN_15
-#define LED3_GPIO_Port GPIOB
+#define LORA_NSS_Pin GPIO_PIN_4
+#define LORA_NSS_GPIO_Port GPIOA
+#define LORA_BUSY_Pin GPIO_PIN_0
+#define LORA_BUSY_GPIO_Port GPIOB
+#define LORA_RESET_Pin GPIO_PIN_1
+#define LORA_RESET_GPIO_Port GPIOB
+#define LORA_DIO1_Pin GPIO_PIN_10
+#define LORA_DIO1_GPIO_Port GPIOB
+#define MOTOR_Pin GPIO_PIN_8
+#define MOTOR_GPIO_Port GPIOB
 #define BEEP_Pin GPIO_PIN_9
 #define BEEP_GPIO_Port GPIOB
+#define LED3_Pin GPIO_PIN_14
+#define LED3_GPIO_Port GPIOB
+#define LED2_Pin GPIO_PIN_15
+#define LED2_GPIO_Port GPIOB
+#define RELAY_Pin GPIO_PIN_14
+#define RELAY_GPIO_Port GPIOC
 
 /* USER CODE BEGIN Private defines */
-/* 按键和LED引脚重映射（匹配ISR_callback.c中的名字） */
-#define KEY1_Pin       GPIO_PIN_12   // 假设按键接在PB12（根据你之前截图中的SW1定义）
+/* Terminal keys and compatibility LED alias used by legacy callbacks. */
+#define KEY1_Pin       GPIO_PIN_12
 #define KEY1_GPIO_Port GPIOB
-// 把这两行改成指向 LED3（PB15）
-#define LED_Pin        LED3_Pin      
+#define KEY2_Pin       GPIO_PIN_13
+#define KEY2_GPIO_Port GPIOB
+#define LED_Pin        LED3_Pin
 #define LED_GPIO_Port  LED3_GPIO_Port
 
 /* USER CODE END Private defines */

@@ -18,13 +18,39 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "dma.h"
 #include "i2c.h"
+#include "spi.h"
+#include "tim.h"
+#include "usart.h"
+#include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
 #include <stdio.h>
+#include "gpio.h"
+#include "dma.h"
+#include "adc.h"
+#include "usart.h"
+#include "tim.h"
 #include "app_main.h"
+#include "llcc68_diag.h"
+#include "llcc68_p2p.h"
+#include "llcc68_p2p_config.h"
+#include "esp.h"
+#include "mqtt.h"
+#include "dht22.h"
+#include "light.h"
+#include "terminal_sensors.h"
+#include "terminal_autonomy.h"
+#include "command_link.h"
+#include "terminal_table.h"
+#include "link_stats.h"
+#include "alarm_registry.h"
+#include "gateway_data.h"
+#include "ui_oled.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,7 +73,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+#if ( LLCC68_P2P_ROLE == LLCC68_P2P_ROLE_RX )
+static uint32_t esp_retry_tick = 0U;
+#endif
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -153,15 +181,17 @@ int main(void)
 
   /* USER CODE END SysInit */
 
-  /* I2C/OLED 实验只初始化 I2C1，其他外设暂不启用。 */
-  // MX_GPIO_Init();
-  // MX_DMA_Init();
-  // MX_TIM1_Init();
-  // MX_TIM3_Init();
-  // MX_TIM4_Init();
-  // MX_USART1_UART_Init();
-  // MX_USART2_UART_Init();
-  // MX_ADC1_Init();
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_DMA_Init();
+  /* TIM1_CH1(PA8) 是终端风机 PWM，两个角色都必须初始化 */
+  MX_TIM1_Init();
+  MX_TIM3_Init();
+  MX_TIM4_Init();
+  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
+  MX_ADC1_Init();
+  MX_SPI1_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 	
@@ -169,7 +199,50 @@ int main(void)
 	// HAL_TIM_Base_Start_IT(&htim1);
 	// HAL_TIM_Base_Start_IT(&htim3);
 	//HAL_TIM_Base_Start_IT(&htim4);
-	app_main();
+#if ( LLCC68_P2P_ROLE == LLCC68_P2P_ROLE_RX )
+	printf("[FW] GATEWAY CONTROL-SUB FIX 20260814-1\r\n");
+#else
+	printf("[FW] TERMINAL CONTROL 20260814-1\r\n");
+#endif
+#if ( LLCC68_P2P_ROLE == LLCC68_P2P_ROLE_TX )
+	if (!TerminalSensors_Init())
+	{
+	    printf("Terminal sensor init warning\r\n");
+	}
+	if (!TerminalAutonomy_Init())
+	{
+	    printf("Terminal autonomy init warning\r\n");
+	}
+#else
+	Light_Led2_Init();
+#endif
+	if (!LLCC68_P2P_Init())
+	{
+	    printf("LLCC68 P2P Init Error\r\n");
+	}
+#if ( LLCC68_P2P_ROLE == LLCC68_P2P_ROLE_RX )
+	/* 网关本地模块与 ESP/MQTT 解耦：ESP 失败时 OLED/在线表/命令链路照常工作 */
+	CommandLink_Init();
+	TerminalTable_Init();
+	LinkStats_Init();
+	AlarmRegistry_Init();
+	GatewayData_Init();
+	UiOled_Init();
+	esp_retry_tick = HAL_GetTick();
+	if (ESP_Init() != 0)
+	{
+	    printf("ESP INIT FAIL\r\n");
+	}
+	else
+	{
+	    mqtt_init();
+	}
+#endif
+	/* 阶段 6 诊断入口运行调用已注释（llcc68_diag 模块文件保留）。 */
+	// LLCC68_Diag_RunOnce();
+	/* app_main() 内含永续 while(1)（app_main.c:624），与 while(1) 中 P2P 轮询
+	   冲突；仅注释其调用，app_main.c 未修改。 */
+	// app_main();
 	
   /* USER CODE END 2 */
 
@@ -177,6 +250,43 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+#if ( LLCC68_P2P_ROLE == LLCC68_P2P_ROLE_TX )
+    TerminalSensors_Process();
+    TerminalAutonomy_Process();
+#endif
+    LLCC68_P2P_Process();
+#if ( LLCC68_P2P_ROLE == LLCC68_P2P_ROLE_RX )
+    LinkStats_Process(HAL_GetTick());
+    CommandLink_Process();
+    mqtt_task_loop();
+    /* ESP/MQTT 断线自动重试：每 60 s 一次（T04 断网恢复） */
+    if ((!mqtt_is_connected()) &&
+        ((HAL_GetTick() - esp_retry_tick) >= 60000U))
+    {
+        esp_retry_tick = HAL_GetTick();
+        printf("ESP RETRY\r\n");
+        if (ESP_Init() == 0)
+        {
+            mqtt_init();
+        }
+        else
+        {
+            printf("ESP FAIL\r\n");
+        }
+    }
+    {
+        UiOledTelemetry ui_telemetry;
+        UiOledStatus ui_status;
+
+        GatewayData_BuildUiData(&ui_telemetry, &ui_status);
+        UiOled_SetData(&ui_telemetry, &ui_status);
+        UiOled_Process();
+        if (UiOled_GetSilenceRequest())
+        {
+            printf("[UI] SILENCE OK\r\n");
+        }
+    }
+#endif
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

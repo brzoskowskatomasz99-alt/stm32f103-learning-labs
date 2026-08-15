@@ -3,6 +3,7 @@
 
 #include "stm32f1xx_hal.h"
 
+/* Terminal node: DHT22 DATA on PC15 (latest terminal schematic). */
 #define DHT22_GPIO_PORT GPIOC
 #define DHT22_GPIO_PIN  GPIO_PIN_15
 

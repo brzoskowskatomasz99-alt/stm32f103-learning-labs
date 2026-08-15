@@ -34,6 +34,8 @@ extern "C" {
 
 extern ADC_HandleTypeDef hadc1;
 
+extern volatile uint16_t adc1_values[2];
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

@@ -2,6 +2,7 @@
 /MDK-ARM/Template/
 /MDK-ARM/Objects/
 /MDK-ARM/Listings/
+/MDK-ARM/*.log
 *.o
 *.d
 *.crf
@@ -29,3 +30,14 @@
 *.orig
 Thumbs.db
 Desktop.ini
+
+# 私有凭据（禁止入库）
+/Core/Inc/secrets.h
+
+# 助手工作目录、串口日志与本地过程记录（不入库）
+/.agents/
+/ClaudeCode_Handoffs/
+/ClaudeCode_Tasks/
+/.codex-*/
+/.claude/
+/serial_logs/
