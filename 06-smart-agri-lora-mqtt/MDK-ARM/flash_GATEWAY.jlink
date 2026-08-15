@@ -1,0 +1,11 @@
+device STM32F103C8
+si 1
+speed 4000
+r
+h
+erase
+loadbin "E:\TEMPLATE\Template\MDK-ARM\Template\Template_GATEWAY_CONTROL.bin", 0x08000000
+verifybin "E:\TEMPLATE\Template\MDK-ARM\Template\Template_GATEWAY_CONTROL.bin", 0x08000000
+r
+g
+q

@@ -1,0 +1,43 @@
+# Keil MDK build output
+/MDK-ARM/Template/
+/MDK-ARM/Objects/
+/MDK-ARM/Listings/
+/MDK-ARM/*.log
+*.o
+*.d
+*.crf
+*.axf
+*.hex
+*.bin
+*.map
+*.lnp
+*.lst
+*.dep
+*.build_log.htm
+
+# Keil and debugger user-specific files
+/MDK-ARM/*.uvguix.*
+/MDK-ARM/*.uvoptx
+/MDK-ARM/JLinkLog.txt
+/MDK-ARM/JLinkSettings.ini
+*.bak
+
+# Local review artifacts
+/.codex_doc_review_adc_soil/
+
+# Editor and operating-system noise
+*.tmp
+*.orig
+Thumbs.db
+Desktop.ini
+
+# 私有凭据（禁止入库）
+/Core/Inc/secrets.h
+
+# 助手工作目录、串口日志与本地过程记录（不入库）
+/.agents/
+/ClaudeCode_Handoffs/
+/ClaudeCode_Tasks/
+/.codex-*/
+/.claude/
+/serial_logs/
